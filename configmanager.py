@@ -24,6 +24,7 @@ def _load(email=None, filepath=CONFIG_FILE):
         if email is None:
             email = next(iter(_config))
         _mail_config = _config.get(email)
+        _mail_config[ADDRESS] = email
         if _mail_config:
             print(f"_load|OK|mail '{email}' found in file '{filepath}'")
             return _mail_config
@@ -70,4 +71,4 @@ def get_server(email=None, filepath=CONFIG_FILE):
 def get_email(filepath=CONFIG_FILE):
     config = _load(None, filepath)
     if config is not None:
-        return next(iter(config))
+        return config.get(ADDRESS)
